@@ -1,6 +1,6 @@
 {
   "name": "soundcn-extractor",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Extract sound files from soundcn TypeScript DataURI format to MP3 files",
   "type": "module",
   "main": "extract-sounds.ts",
@@ -14,6 +14,6 @@
     "extraction",
     "datauri"
   ],
-  "author": "",
+  "author": "Jakub T. Jankiewicz <jcubic@onet.pl>",
   "license": "MIT"
 }
