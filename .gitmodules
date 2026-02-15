@@ -1,0 +1,3 @@
+[submodule "soundcn"]
+	path = soundcn
+	url = git@github.com:kapishdima/soundcn.git
