@@ -15,5 +15,8 @@
     "datauri"
   ],
   "author": "Jakub T. Jankiewicz <jcubic@onet.pl>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.2.4"
+  }
 }

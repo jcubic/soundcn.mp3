@@ -6,7 +6,14 @@ This repository contains a TypeScript script to extract MP3 sound files from the
 
 The `soundcn` submodule contains sound files stored as TypeScript files with DataURIs (base64-encoded audio). This script extracts those sounds and saves them as standard MP3 files.
 
-The script uses the same decoding logic as `soundcn/registry/soundcn/hooks/use-sound.ts` (lines 26-31) to ensure proper audio extraction.
+The script uses the base64 decoding logic from `soundcn/registry/soundcn/hooks/use-sound.ts` `decodeAudioData` function. It uses a "monkey patching" approach:
+
+1. **Reads** the `use-sound.ts` file and extracts the decoding logic using regex
+2. **Creates** a temporary utility file (`decode-util.ts`) with the extracted function
+3. **Imports** and uses the function for extraction via dynamic import
+4. **Removes** the temporary file when done (even on errors)
+
+This ensures we're using the exact same logic as the submodule without hardcoding line numbers (which would break if the source changes) or permanently modifying the submodule.
 
 ## Setup
 
@@ -28,24 +35,10 @@ Extract all sound files from the submodule:
 npm run extract
 ```
 
-Or directly:
-
-```bash
-./extract-sounds.ts
-```
-
-Or with explicit node command:
-
-```bash
-node --experimental-strip-types extract-sounds.ts
-```
-
 ## What it does
 
 1. **Scans** all TypeScript files in `soundcn/registry/soundcn/sounds/` directory
-2. **Extracts** the `dataUri` field containing base64-encoded audio data
-3. **Converts** DataURI format to binary MP3 files
-4. **Saves** all MP3 files to the `src/` directory in the root
+2. **Extracts** the `dataUri` and convert them to mp3 files in `src` directory
 
 ## Requirements
 
